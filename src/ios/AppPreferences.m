@@ -210,24 +210,9 @@
 {
 	__block CDVPluginResult* result;
 
-	@try {
+	result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"not implemented"];
 
-		NSString *returnVar;
-
-		NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-		[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-
-		result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:returnVar];
-
-	} @catch (NSException * e) {
-
-		result = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT messageAsString:[e reason]];
-
-	} @finally {
-
-		[self.commandDelegate sendPluginResult:result callbackId:[command callbackId]];
-
-	}
+	[self.commandDelegate sendPluginResult:result callbackId:[command callbackId]];
 
 }
 
